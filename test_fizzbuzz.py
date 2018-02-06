@@ -4,7 +4,7 @@ import unittest
 def fizzbuzz(number):
     if number == 3:
         return 'fizz'
-    else
+    else:
         return 'buzz'
 
 
