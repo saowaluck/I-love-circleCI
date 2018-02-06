@@ -12,7 +12,7 @@ class FizzbuzzTest(unittest.TestCase):
     def test_input3_should_return_fizz(self):
         result = fizzbuzz(3)
         self.assertEqual(result, 'fizz')
-        def test_input5_should_return_buzz(self):
+    def test_input5_should_return_buzz(self):
         result = fizzbuzz(6)
         self.assertEqual(result, 'buzz')
 
