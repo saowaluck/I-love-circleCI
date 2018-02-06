@@ -2,8 +2,8 @@ default: &default
   working_directory: ~/circleci_python_workshop
   docker:
     - image: circleci/python:3.6.1
-workflow:
-  version: 2
+version: 2
+jobs:
   checkout_code:
     <<: *default
   steps:
@@ -68,17 +68,18 @@ unit_test:
           key: -py-deps-{{ checksum "requirements.txt "}}
           path:
           - ./venv
-
+workflows:
+  version: 2
   circle_ci_workshop_pipleline:
-  jobs:
-    - checkout_code
-    - python_dependencies:
-      requires:
-        - checkout_code
-    - static_analysis:
-      requires:
-        - python_dependencies
-    - unit_test:
-      requires:
-        - python_dependencies
-          
+    jobs:
+      - checkout_code
+      - python_dependencies:
+        requires:
+          - checkout_code
+      - static_analysis:
+        requires:
+          - python_dependencies
+      - unit_test:
+        requires:
+          - python_dependencies
+            
