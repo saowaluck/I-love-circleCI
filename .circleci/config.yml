@@ -39,13 +39,13 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            python test_fizzbubuzz.py
+            python test_fizzbuzz.py
 
       - run:
           name: run static analysis
           command: |
             . venv/bin/activate
-            flake8 test_fizzbubuzz.py
+            flake8 test_fizzbuzz.py
 
       - store_artifacts:
           path: test-reports
