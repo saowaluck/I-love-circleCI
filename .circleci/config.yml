@@ -20,7 +20,7 @@ jobs:
           at: .
       - restore_cache:
           keys:
-            - py-deps-{{ checksum "requirements.txt "}}
+            - py-deps-{{ checksum "requirements.txt"}}
       - run:
           name: Install Dependencies
           command: |
@@ -28,7 +28,7 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
       - save_cache:
-          key: py-deps-{{ checksum "requirements.txt "}}
+          key: py-deps-{{ checksum "requirements.txt"}}
           paths:
             - ./venv
 
@@ -39,7 +39,7 @@ jobs:
           at: .
       - restore_cache:
           keys:
-            - py-deps-{{ checksum "requirements.txt "}}
+            - py-deps-{{ checksum "requirements.txt"}}
       - run:
           name: Run static Analysis
           command: |
@@ -53,7 +53,7 @@ jobs:
           at: .
       - restore_cache:
           keys:
-            - py-deps-{{ checksum "requirements.txt "}}
+            - py-deps-{{ checksum "requirements.txt"}}
       - run:
           name: Run Unit Test
           command: |
