@@ -11,76 +11,63 @@ jobs:
       - checkout
       - persist_to_workshop:
           root: .
-          path: .
+          paths: .
 
   python_dependencies:
     <<: *defaults
     steps:
       - attach_workspace:
-        at: .
+          at: .
       - restore_cache:
           keys:
-            -py-deps-{{ checksum "requirements.txt "}}
+            - py-deps-{{ checksum "requirements.txt "}}
       - run:
-        name: Install Dependencies
-        command: |
-          python3 -m venv venv
-          . venv/bin/activate
-          pip install -r requirements.txt
-        save_cache:
-          key: -py-deps-{{ checksum "requirements.txt "}}
-          path:
-          - ./venv
+          name: Install Dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: py-deps-{{ checksum "requirements.txt "}}
+          paths:
+            - ./venv
 
   static_analysis:
     <<: *defaults
-      steps:
-        - attach_workspace:
+    steps:
+      - attach_workspace:
           at: .
-        - restore_cache:
-            keys:
-              -py-deps-{{ checksum "requirements.txt "}}
-        - run:
+      - run:
           name: Run static Analysis
           command: |
             python3 -m venv venv
             . venv/bin/activate
             flake8 test_fizzbuzz.py
-          save_cache:
-            key: -py-deps-{{ checksum "requirements.txt "}}
-            path:
-            - ./venv
 
   unit_test:
     <<: *defaults
-      steps:
-        - attach_workspace:
+    steps:
+      - attach_workspace:
           at: .
-        - restore_cache:
-            keys:
-              -py-deps-{{ checksum "requirements.txt "}}
-        - run:
-          name: Run static Analysis
+      - run:
+          name: Run Unit Test
           command: |
             python3 -m venv venv
             . venv/bin/activate
             python test_fizzbuzz.py
-          save_cache:
-            key: -py-deps-{{ checksum "requirements.txt "}}
-            path:
-            - ./venv
+
 workflows:
   version: 2
   circle_ci_workshop_pipleline:
     jobs:
       - checkout_code
       - python_dependencies:
-        requires:
-          - checkout_code
+          requires:
+            - checkout_code
       - static_analysis:
-        requires:
-          - python_dependencies
+          requires:
+            - python_dependencies
       - unit_test:
-        requires:
-          - python_dependencies
-            
+          requires:
+            - python_dependencies
+              
