@@ -1,11 +1,12 @@
-default: &default
+defaults: &defaults
   working_directory: ~/circleci_python_workshop
   docker:
     - image: circleci/python:3.6.1
+
 version: 2
 jobs:
   checkout_code:
-    <<: *default
+    <<: *defaults
   steps:
     - checkout
     - persist_to_workshop:
@@ -13,7 +14,7 @@ jobs:
         path: .
 
 python_dependencies:
-  <<: *default
+  <<: *defaults
   steps:
     - attach_workspace:
       at: .
@@ -32,7 +33,7 @@ python_dependencies:
         - ./venv
 
 static_analysis:
-  <<: *default
+  <<: *defaults
     steps:
       - attach_workspace:
         at: .
@@ -51,7 +52,7 @@ static_analysis:
           - ./venv
 
 unit_test:
-  <<: *default
+  <<: *defaults
     steps:
       - attach_workspace:
         at: .
