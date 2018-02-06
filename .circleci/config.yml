@@ -37,6 +37,9 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - restore_cache:
+          keys:
+            - py-deps-{{ checksum "requirements.txt "}}
       - run:
           name: Run static Analysis
           command: |
@@ -49,6 +52,9 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - restore_cache:
+          keys:
+            - py-deps-{{ checksum "requirements.txt "}}
       - run:
           name: Run Unit Test
           command: |
