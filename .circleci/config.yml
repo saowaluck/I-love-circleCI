@@ -1,5 +1,5 @@
 defaults: &defaults
-  working_directory: ~/I-LOVE-CIRCLECI
+  working_directory: ~/I-love-circleCI
   docker:
     - image: circleci/python:3.6.1
 
