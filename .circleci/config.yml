@@ -7,11 +7,11 @@ version: 2
 jobs:
   checkout_code:
     <<: *defaults
-  steps:
-    - checkout
-    - persist_to_workshop:
-        root: .
-        path: .
+    steps:
+      - checkout
+      - persist_to_workshop:
+          root: .
+          path: .
 
   python_dependencies:
     <<: *defaults
